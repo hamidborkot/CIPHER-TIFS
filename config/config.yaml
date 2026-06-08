@@ -1,0 +1,58 @@
+# SENTINEL-EGO Hyperparameters
+# All experiments in the TIFS submission used these exact values.
+
+federation:
+  n_clients: 10
+  fl_rounds: 10
+  local_epochs: 3
+  partition_strategy: user_stratified   # options: user_stratified, random, archetype
+
+model:
+  hidden_dims: [256, 128, 64]
+  dropout: 0.3
+  activation: relu
+  batch_norm: true
+
+training:
+  optimizer: adam
+  learning_rate: 0.001
+  batch_size: 512
+  seed: 42
+
+differential_privacy:
+  enabled: true
+  noise_scale: 2.0       # sigma
+  clip_norm: 1.0
+  delta: 1.0e-5
+  sampling_rate: 0.01    # q
+  rdp_alpha: 10          # Rényi order for accounting
+
+labeling:
+  target_malicious: 100
+  insider_rate_min: 0.015
+  insider_rate_max: 0.040
+  ext_email_percentile: 0.95
+
+features:
+  pbi_threshold_percentile: 80
+  aif_threshold_percentile: 85
+  n_archetypes: 10
+
+experiments:
+  e3_noise_values: [0.5, 1.0, 2.0, 4.0, 8.0]
+  e4_partition_strategies: [archetype, random, user_stratified]
+  e5_convergence_rounds: 10
+
+datasets:
+  d1_cert:
+    name: CERT r4.2
+    label_col: label
+    malicious_rate: 0.0272
+  d2_corporate:
+    name: Corporate Environment
+    label_col: is_malicious
+    malicious_rate: 0.0538
+  d3_classified:
+    name: Classified Environment
+    label_col: is_malicious
+    malicious_rate: 0.0251

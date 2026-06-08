@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "SENTINEL-EGO: Privacy-Preserving Federated Insider Threat Detection"
+authors:
+  - family-names: Borkot
+    given-names: Hamid
+repository-code: "https://github.com/hamidborkot/SENTINEL-EGO-TIFS"
+license: MIT
+year: 2025
+abstract: >
+  SENTINEL-EGO is a federated learning framework for insider threat detection
+  that achieves AUC = 0.9842 and F1 = 0.8571 on CERT r4.2 under formal
+  differential privacy guarantees (epsilon = 1.28, delta = 1e-5).
+  Evaluated across three independent environments: CERT r4.2 (behavioral),
+  corporate physical-access, and classified environments.
+keywords:
+  - insider-threat-detection
+  - federated-learning
+  - differential-privacy
+  - CERT-dataset
+  - behavioral-analytics
+  - cybersecurity

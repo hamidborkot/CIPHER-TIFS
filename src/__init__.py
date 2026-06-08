@@ -1,0 +1,1 @@
+"""SENTINEL-EGO source package."""

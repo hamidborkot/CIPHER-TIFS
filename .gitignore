@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb~
+
+# Data (never commit raw datasets)
+data/cert_r4.2/
+data/corporate/
+data/classified/
+*.csv
+!results/*.csv
+!data/README.md
+
+# Environments
+.venv/
+env/
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Kaggle
+kaggle.json
