@@ -1,0 +1,10 @@
+Method,Partition,F1,AUC,Precision,Recall,FPR,FNR,Privacy,epsilon,Reference
+SENTINEL-EGO (Archetype),archetype,0.8571,0.9842,0.8228,0.8943,0.0054,0.1057,DP,1.2830,Ours
+SENTINEL-EGO (Random),random,0.8412,0.9798,0.8103,0.8741,0.0063,0.1259,DP,1.2830,Ours
+SENTINEL-EGO (User-Stratified),user_stratified,0.8499,0.9815,0.8187,0.8832,0.0058,0.1168,DP,1.2830,Ours
+Isolated-DP,user_stratified,0.8753,0.9814,0.8699,0.8808,0.0037,0.1192,DP,1.2830,Ours
+Centralized-GBT (no-DP),centralized,1.0,1.0,1.0,1.0,0.0,0.0,None,,Ours
+Yuan 2018 (LSTM-CNN),,0.7812,0.9449,,,,,None,,Yuan et al. 2018
+LAN TIFS 2024,,0.8103,0.9478,,,,,None,,LAN et al. 2024
+FedAT (Gayathri 2024),,0.6795,,,,,,,None,Gayathri et al. 2024
+Ye 2025 (DeepInsight-FL),,0.9972,0.9989,,,,,None,,Ye et al. 2025

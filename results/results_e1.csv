@@ -1,0 +1,4 @@
+Method,F1,AUC,Precision,Recall,Accuracy,FPR,FNR,Threshold,Privacy,epsilon,delta
+Isolated-DP,0.8753,0.9814,0.8699,0.8808,0.9892,0.0037,0.1192,0.71,DP,1.2830,1e-05
+SENTINEL-EGO (FL+DP),0.8571,0.9842,0.8228,0.8943,0.9876,0.0054,0.1057,0.67,DP,1.2830,1e-05
+Centralized-GBT (no-DP),1.0,1.0,1.0,1.0,1.0,0.0,0.0,,None,,
