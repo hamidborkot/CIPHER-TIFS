@@ -1,0 +1,4 @@
+Configuration,F1,AUC,Recall,FPR,Aggregation,Attack
+SENTINEL-EGO (clean no attack),0.8541,0.9678,0.8537,0.0040,FedAvg,None
+FedAvg + Byzantine (3/10 clients),0.8119,0.9741,0.8174,0.0055,FedAvg,GradScale10+LabelFlip
+Multi-Krum SENTINEL-EGO + Byzantine (3/10 clients),0.7359,0.9586,0.7748,0.0092,Multi-Krum,GradScale10+LabelFlip

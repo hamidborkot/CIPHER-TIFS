@@ -1,0 +1,4 @@
+Model,Detection F1,Detection AUC,MIA AUC,Privacy
+No-DP Isolated,0.9841,0.9998,0.5031,None
+DP-Isolated (eps=1.28),0.8563,0.9649,0.5161,Protected (eps=1.28)
+SENTINEL-EGO (eps=1.28),0.8531,0.9601,0.5023,Protected (eps=1.28)
