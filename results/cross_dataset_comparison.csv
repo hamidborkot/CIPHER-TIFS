@@ -1,0 +1,17 @@
+Metric,r5.2,r6.2,Notes
+Users,2000,4000,r6.2 is 2x larger
+Malicious_users,100,100,Same count both datasets
+Malicious_pct,5.45%,2.72%,r5.2 higher imbalance
+E1_F1,0.7317,0.8520,r6.2 benefits from more data
+E1_AUC,0.9127,0.9693,Consistent improvement pattern
+E1_Recall,0.6281,0.8659,
+E1_Precision,0.8763,0.8386,r5.2 more precise less recall
+E1_FPR,0.0054,0.0046,Both very low FPR
+E1_Epsilon,1.2830,1.2830,Identical DP budget
+E8_MIA_AUC,0.5354,0.5171,Both near-random (DP effective)
+E9_Clean_F1,0.7181,0.8561,
+E9_FedAvg_Attack_F1,0.7063,0.8064,
+E9_Krum_Attack_F1,0.7022,0.7572,
+E9_FedAvg_F1_drop,-0.0118,-0.0497,r5.2 less degradation (smaller dataset)
+E9_Krum_Recall_gain_over_FedAvg,+0.0190,+0.0146,Krum advantage holds both datasets
+E9_Krum_AUC_gap_from_clean,-0.0167,-0.0106,
