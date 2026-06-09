@@ -1,0 +1,2 @@
+Model,Detection_F1,Detection_AUC,MIA_AUC,Privacy,Epsilon,Delta
+SENTINEL-EGO (FL+DP),0.852,0.9693,0.5171,DP effective,1.28,1e-5
