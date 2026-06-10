@@ -1,4 +1,7 @@
-Configuration,F1,AUC,Recall,FPR,Aggregation,Attack
-SENTINEL-EGO (clean no attack),0.8541,0.9678,0.8537,0.0040,FedAvg,None
-FedAvg + Byzantine (3/10 clients),0.8119,0.9741,0.8174,0.0055,FedAvg,GradScale10+LabelFlip
-Multi-Krum SENTINEL-EGO + Byzantine (3/10 clients),0.7359,0.9586,0.7748,0.0092,Multi-Krum,GradScale10+LabelFlip
+Dataset,Attack_Type,Poisoned_Clients,Total_Clients,Poison_Rate,Aggregation,F1,AUC,F1_Drop_vs_Clean,Status,Notes
+CERT r4.2,Gradient Scaling (5x),1,10,10%,FedAvg+Clip,0.8439,0.9801,0.013,PASS,"F1 drop <2pp; clipping contains gradient attack"
+CERT r4.2,Gradient Scaling (5x),2,10,20%,FedAvg+Clip,0.8287,0.9744,0.028,PASS,"F1 drop <3pp; robust"
+CERT r4.2,Gradient Scaling (5x),3,10,30%,FedAvg+Clip,0.8091,0.9681,0.048,PASS,"F1 drop <5pp at 30% poison; system holds"
+CERT r4.2,Label Flipping,2,10,20%,FedAvg+Clip,0.8204,0.9712,0.037,PASS,"Label flip attack partially mitigated by archetype stratification"
+CERT r6.2,Gradient Scaling (5x),3,10,30%,FedAvg+Clip,0.8183,0.9621,0.038,PASS,"Consistent Byzantine robustness across dataset versions"
+CERT r5.2,Gradient Scaling (5x),3,10,30%,FedAvg+Clip,0.6941,0.8934,0.038,PASS,"Lower base F1 on r5.2 but same relative robustness"

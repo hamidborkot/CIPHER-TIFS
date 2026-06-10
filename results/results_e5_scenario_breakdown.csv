@@ -1,0 +1,6 @@
+Scenario,Description,Threat_Type,N_Malicious,N_Benign,F1_SENTINEL,AUC_SENTINEL,F1_Legacy,PBI_Delta,Notes
+S1,Data theft before resignation,Exfiltration,42,9854,0.9124,0.9891,0.7833,+0.129,"Strong temporal spike; PBI drift fires early. Clear exfiltration pattern."
+S2,Slow-burn IP theft (reconnaissance),Reconnaissance,28,9854,0.6891,0.9203,0.5512,+0.138,"Extended low-rate anomaly; PBI cumulative drift critical here. Hardest scenario."
+S3,IT sabotage (after-hours access),Sabotage,19,9854,0.8742,0.9654,0.7218,+0.152,"After-hours logon pattern; AIF co-occurrence with deletions key signal."
+S4,Privilege escalation + lateral movement,Escalation,31,9854,0.8103,0.9447,0.6944,+0.116,"LDAP anomaly + archetype mismatch drive detection."
+S5,Policy violation (general),Policy,67,9854,0.8831,0.9801,0.8102,+0.073,"High volume; Legacy performs reasonably; PBI adds moderate gain."
