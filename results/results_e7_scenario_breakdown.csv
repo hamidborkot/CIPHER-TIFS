@@ -1,0 +1,6 @@
+Scenario,F1,AUC,Recall,FPR,n_malicious,n_total,Dataset,Notes
+S1: USB Exfiltration,0.8774,0.9829,0.8891,0.0042,9856,38453,CERT r4.2,"Highest F1 — USB removable media signal is strong"
+S2: Email Exfiltration,0.0674,0.5650,0.0612,0.0031,242,93988,CERT r4.2,"Very sparse positives (0.26%) — model struggles without USB signal"
+S3: After-Hours Access,0.0609,0.6672,0.0552,0.0028,145,39150,CERT r4.2,"Sparse positives (0.37%); AUC=0.667 shows ranking signal exists"
+S4: Risky Web+Email,0.1111,0.8304,0.1163,0.0018,43,45495,CERT r4.2,"Very sparse positives (0.09%) but AUC=0.830 — model ranks them well"
+S5: General Accumulation,0.1119,0.5645,0.1054,0.0023,433,178476,CERT r4.2,"Background class — low F1 expected; most records are benign"
