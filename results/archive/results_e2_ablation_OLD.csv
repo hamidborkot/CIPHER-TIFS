@@ -1,0 +1,8 @@
+# ARCHIVED — superseded by results_e2_ablation_FIXED.csv
+# This file used USB features in Legacy-Only baseline (biased ablation)
+# DO NOT USE for paper tables
+Variant,F1,AUC,Notes
+Legacy-Only,0.8560,0.9801,BIASED — rm_copies and usb_count included in baseline
++PBI,0.8571,0.9821,
++PBI+AIF,0.8571,0.9835,
+Full SENTINEL-EGO,0.8571,0.9842,

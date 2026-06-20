@@ -1,16 +1,18 @@
-# Theoretical Foundations
+# Theory
 
-This directory contains the three formal theorems that underpin SENTINEL-EGO's security and performance guarantees.
+This directory will contain the formal theoretical components required by TIFS reviewers.
+To be populated during the writing phase.
 
-| File | Theorem | Claim |
-|------|---------|-------|
-| `theorem1_pbi_detectability.md` | Theorem 1 | PBI fires whenever behavioral deviation exceeds a provable minimum threshold (Pinsker inequality) |
-| `theorem2_convergence.md` | Theorem 2 | Archetype-stratified FL converges faster than random partitioning (Li et al. 2020 extension) |
-| `theorem3_dp_guarantee.md` | Theorem 3 | Full system satisfies (ε=1.28, δ=1e-5)-DP via Rényi DP composition + MIA empirical validation |
+## Planned Contents
 
-## How These Support the Paper
+| File | Content | Paper Section |
+|---|---|---|
+| `dp_proof.md` | Formal (ε,δ)-DP proof for DP-SGD + FedAvg composition | Sec. IV-B |
+| `convergence_bound.md` | FL convergence bound under DP noise (Theorem 1) | Sec. IV-C |
+| `mia_bound.md` | MIA distinguishing advantage bound derivation | Sec. V-D |
+| `pbi_kl_divergence.md` | KL-divergence formulation for PBI drift score | Sec. III-A |
 
-- **Section III** (System Model): cite Theorem 3 for DP guarantee
-- **Section IV-A** (PBI): cite Theorem 1 for detectability bound  
-- **Section IV-C** (Federated Aggregation): cite Theorem 2 for convergence claim
-- **Theorems appear in Section V** (Formal Analysis) in the paper
+## Key Theorems to Prove
+1. **DP Composition**: Sequential composition of per-round DP-SGD gives (ε,δ)-DP for the full FL training
+2. **Utility Bound**: E[F1_loss] ≤ O(σ²·T / n) where σ=noise, T=rounds, n=clients
+3. **MIA Advantage**: Adv_MIA ≤ e^ε − 1 for any membership inference adversary
