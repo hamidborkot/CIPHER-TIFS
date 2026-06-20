@@ -1,4 +1,4 @@
-"""Behavioral feature engineering: PBI, AIF, and archetype derivation."""
+"""Behavioral feature engineering: BDM, PSE, and archetype derivation."""
 import numpy as np
 import pandas as pd
 from sklearn.cluster import KMeans
@@ -12,7 +12,7 @@ def compute_pbi(
     threshold: float = None,
 ) -> pd.DataFrame:
     """
-    Peer Behavioral Index (PBI).
+    Behavioral Drift Monitor (BDM).
     For each row, compute the z-score distance of the user's feature
     vector from the mean of their peer group (same department/role).
 
@@ -25,7 +25,7 @@ def compute_pbi(
 
     Returns
     -------
-    df with added columns: pbi_drift, pbi_alert
+    df with added columns: BDM_drift, BDM_alert
     """
     df = df.copy()
     X = df[feature_cols].fillna(0).values.astype(np.float32)
@@ -35,11 +35,11 @@ def compute_pbi(
     std = X.std(axis=0) + 1e-8
     drift = np.sqrt(((X - mu) / std) ** 2).mean(axis=1)
 
-    df["pbi_drift"] = drift
+    df["BDM_drift"] = drift
 
     if threshold is None:
         threshold = np.percentile(drift, 80)  # dynamic 80th percentile
-    df["pbi_alert"] = (drift > threshold).astype(int)
+    df["BDM_alert"] = (drift > threshold).astype(int)
     return df
 
 
@@ -49,7 +49,7 @@ def compute_aif(
     weights: list[float] = None,
 ) -> pd.DataFrame:
     """
-    Anomaly Integration Fusion (AIF).
+    Persona-Stratified Ensemble (PSE).
     Weighted sum of normalised anomaly signals.
 
     Parameters
@@ -60,7 +60,7 @@ def compute_aif(
 
     Returns
     -------
-    df with added columns: aif_score, aif_alert
+    df with added columns: PSE_score, PSE_alert
     """
     df   = df.copy()
     X    = df[signal_cols].fillna(0).values.astype(np.float32)
@@ -71,8 +71,8 @@ def compute_aif(
     weights = np.array(weights, dtype=np.float32)
 
     score = X_n @ weights
-    df["aif_score"] = score
-    df["aif_alert"] = (score > np.percentile(score, 85)).astype(int)
+    df["PSE_score"] = score
+    df["PSE_alert"] = (score > np.percentile(score, 85)).astype(int)
     return df
 
 
