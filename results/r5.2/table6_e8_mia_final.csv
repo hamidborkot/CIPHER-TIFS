@@ -1,2 +1,2 @@
 Dataset,Model,Detection_F1,Detection_AUC,MIA_AUC,Privacy_Status,Epsilon,Delta
-CERT r5.2,SENTINEL-EGO (FL+DP),0.7317,0.9127,0.5354,Borderline (0.53 threshold),1.2830,1e-5
+CERT r5.2,CIPHER (FL+DP),0.7317,0.9127,0.5354,Borderline (0.53 threshold),1.2830,1e-5
