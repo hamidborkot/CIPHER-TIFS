@@ -1,5 +1,5 @@
 # ============================================================
-# CELL K_FINISH — SENTINEL-EGO r4.2 completion: E2 + E4 + E7
+# CELL K_FINISH — CIPHER r4.2 completion: E2 + E4 + E7
 # ============================================================
 # PREREQUISITES: Run the main E1 cell first so these are in memory:
 #   X_train, X_test, y_train, y_test, test_df
@@ -38,21 +38,21 @@ ABLATION_SETS = {
         'http_count', 'risky_count', 'risky_ratio',
         'role_changes', 'dept_changes', 'O', 'C', 'E', 'A', 'N'
     ]),
-    '+PBI': safe_cols([
+    '+BDM': safe_cols([
         'logon_count', 'after_hrs_logon', 'unique_pcs', 'ah_ratio',
         'file_ops', 'email_sent', 'ext_email', 'avg_mail_size', 'ext_ratio',
         'http_count', 'risky_count', 'risky_ratio',
         'role_changes', 'dept_changes', 'O', 'C', 'E', 'A', 'N',
         'pbi_drift', 'pbi_alert'
     ]),
-    '+PBI+AIF': safe_cols([
+    '+BDM+PSE': safe_cols([
         'logon_count', 'after_hrs_logon', 'unique_pcs', 'ah_ratio',
         'file_ops', 'email_sent', 'ext_email', 'avg_mail_size', 'ext_ratio',
         'http_count', 'risky_count', 'risky_ratio',
         'role_changes', 'dept_changes', 'O', 'C', 'E', 'A', 'N',
-        'pbi_drift', 'pbi_alert', 'aif_score', 'aif_alert'
+        'BDM_drift', 'BDM_alert', 'PSE_score', 'PSE_alert'
     ]),
-    'Full SENTINEL-EGO': list(FEAT_COLS)
+    'Full CIPHER': list(FEAT_COLS)
 }
 
 abl_results = {}
@@ -96,7 +96,7 @@ r_nodp['Federated'] = 'Yes'
 dp_f1 = round(r_nodp['F1'] - r_fed['F1'], 4)
 dp_auc = round(r_nodp['AUC'] - r_fed['AUC'], 4)
 print(f"\n  No-DP FL     : F1={r_nodp['F1']:.4f}  AUC={r_nodp['AUC']:.4f}")
-print(f"  SENTINEL-EGO : F1={r_fed['F1']:.4f}   AUC={r_fed['AUC']:.4f}  "
+print(f"  CIPHER : F1={r_fed['F1']:.4f}   AUC={r_fed['AUC']:.4f}  "
       f"eps={eps_fed:.4f}")
 print(f"  DP Cost  dF1={dp_f1:+.4f}  dAUC={dp_auc:+.4f}  "
       f"{'OK' if abs(dp_f1) < 0.03 else 'WARNING: large gap'}")
@@ -118,7 +118,7 @@ e4 = {
     'Isolated-DP (no FL)':      r_iso,
     'No-DP FL (no privacy)':    r_nodp,
     'Centralized-GBT (no DP)':  r_gbt,
-    'SENTINEL-EGO (Ours)':      r_fed,
+    'CIHER (Ours)':      r_fed,
 }
 df_e4 = pd.DataFrame(e4).T
 df_e4.to_csv("results_e4_comparison_FINAL.csv")
@@ -183,13 +183,13 @@ print("=" * 60)
 
 rows = {
     'Isolated-DP':     r_iso,
-    'SENTINEL-EGO':    r_fed,
+    'CIPHER':    r_fed,
     'Centralized-GBT': r_gbt,
     'No-DP FL':        r_nodp,
     'Abl Legacy-Only': abl_results.get('Legacy-Only', {}),
-    'Abl +PBI':        abl_results.get('+PBI', {}),
-    'Abl +PBI+AIF':    abl_results.get('+PBI+AIF', {}),
-    'Abl Full':        abl_results.get('Full SENTINEL-EGO', {}),
+    'Abl +BDM':        abl_results.get('+BDM', {}),
+    'Abl +BDM+PSE':    abl_results.get('+BDM+PSE', {}),
+    'Abl Full':        abl_results.get('Full CIPHER', {}),
 }
 for k, v in rows.items():
     if isinstance(v, dict) and 'F1' in v:
