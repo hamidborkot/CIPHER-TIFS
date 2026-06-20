@@ -1,4 +1,4 @@
-# SENTINEL-EGO Results — CERT r6.2 (Local GPU Run)
+# CIPHER Results — CERT r6.2 (Local GPU Run)
 
 All results produced on local machine: **NVIDIA GeForce RTX 5070 Laptop GPU (8.5 GB VRAM)**  
 Dataset: **CERT Insider Threat Dataset r6.2**  
@@ -38,7 +38,7 @@ Date: June 2026
 
 ## Reproducibility
 
-All experiments use `SEED=42`. Full code in `src/sentinel_ego_local.py`.
+All experiments use `SEED=42`. Full code in `src/CIPHER_local.py`.
 
 ```bash
 pip install torch torchvision scikit-learn pandas numpy
