@@ -1,7 +1,7 @@
 # CIPHER — Writing Checklist (IEEE TIFS)
 
-> **System name:** CIPHER (not SENTINEL-EGO — that is the TDSC paper)  
-> **Module names:** BDM / PSE / DPFA (not PBI / AIF / FAL)  
+> **System name:** CIPHER   
+> **Module names:** BDM / PSE / DPFA 
 > **Primary claim:** MIA-validated DP, NOT detection accuracy  
 > **Headline number:** MIA AUC 0.7834 → 0.5024, F1=0.8531, ε=1.28  
 
@@ -126,15 +126,15 @@
 
 | Metric | Value | Never confuse with |
 |---|---|---|
-| F1 primary | **0.8531** | TDSC paper F1=0.9924 (different dataset) |
-| AUC primary | **0.9601** | — |
-| ε (privacy) | **1.2830** | TDSC paper ε=1.4042 |
-| δ | **1e-5** | — |
-| MIA AUC No-DP | **0.7834** | Your strongest result |
-| MIA AUC CIPHER | **0.5024** | Your strongest result |
-| DP cost (ΔF1) | **−0.0586** vs No-DP FL | — |
-| Byzantine drop | **<5pp** at 30% | — |
-| Ablation AUC gain | **+0.0093** | Frame as AUC, not F1 |
+| F1 primary | **0.8531** | 
+| AUC primary | **0.9601** |
+| ε (privacy) | **1.2830** | 
+| δ | **1e-5** | 
+| MIA AUC No-DP | **0.7834** | strongest result |
+| MIA AUC CIPHER | **0.5024** | strongest result |
+| DP cost (ΔF1) | **−0.0586** vs No-DP FL |
+| Byzantine drop | **<5pp** at 30% |
+| Ablation AUC gain | **+0.0093** | Frame as AUC, not F1 
 
 ---
 
@@ -143,7 +143,6 @@
 - [ ] System architecture figure (Fig. 1) drawn
 - [ ] All 3 theorems written in `theory/`
 - [ ] Every table number matches its source CSV exactly
-- [ ] No TDSC module names (PBI/AIF/FAL/BTT/CDE) appear anywhere in this paper
 - [ ] CERT dataset properly cited (CMU SEI)
 - [ ] Anonymous version prepared (remove name from notebook comments)
 - [ ] `CITATION.cff` updated with final DOI
