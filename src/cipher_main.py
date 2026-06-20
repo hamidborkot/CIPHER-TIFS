@@ -4,7 +4,6 @@ CIPHER: Certified Insider-threat detection via Privacy-preserving
         Hierarchical fEderated behavioral leaRning
 
 IEEE TIFS Submission 2026
-Author: Md. Hamid Borkot Tulla, Université de Bourgogne
 
 Pipeline:
   1. Load CERT behavioral features
