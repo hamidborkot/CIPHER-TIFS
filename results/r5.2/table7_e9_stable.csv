@@ -1,4 +1,4 @@
 Dataset,Config,Agg,Attack,F1,AUC,Recall,FPR,Epsilon
-CERT r5.2,SENTINEL-EGO (clean),FedAvg,None,0.7181,0.9103,0.5980,0.0041,1.2830
+CERT r5.2,CIPHER (clean),FedAvg,None,0.7181,0.9103,0.5980,0.0041,1.2830
 CERT r5.2,FedAvg+Byzantine (3/10),FedAvg,Grad×5.0+LabelFlip,0.7063,0.9124,0.5945,0.0054,1.2830
 CERT r5.2,Multi-Krum+Byzantine (3/10),Multi-Krum,Grad×5.0+LabelFlip,0.7022,0.8936,0.6135,0.0081,1.2830
