@@ -1,7 +1,6 @@
 """BDM — Behavioral Drift Monitor.
 
 Paper module: Section III-B (CIPHER, IEEE TIFS submission)
-Previously known as: PBI (Persona Behavioral Integrity) — name used in TDSC paper.
 Renamed to BDM here to maintain clear separation between TDSC and TIFS submissions.
 
 Function:
