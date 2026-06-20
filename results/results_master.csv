@@ -1,10 +1,10 @@
 Experiment,Model,F1,AUC,MIA_AUC,Epsilon,Notes
 E1,No-DP Isolated,0.9841,0.9998,N/A,None,Privacy-free ceiling
 E1,DP-Isolated,0.8563,0.9649,N/A,1.28,Centralized DP
-E1,SENTINEL-EGO (FL+DP),0.8531,0.9601,N/A,1.28,Primary contribution
+E1,CIPHER (FL+DP),0.8531,0.9601,N/A,1.28,Primary contribution
 E8,No-DP Isolated,0.9841,0.9998,0.5031,None,MIA baseline
 E8,DP-Isolated,0.8563,0.9649,0.5161,1.28,MIA under DP
-E8,SENTINEL-EGO,0.8531,0.9601,0.5023,1.28,MIA under FL+DP
-E9,SENTINEL-EGO clean,0.8541,0.9678,N/A,1.28,No attack baseline
+E8,CIPHER,0.8531,0.9601,0.5023,1.28,MIA under FL+DP
+E9,CIPHER clean,0.8541,0.9678,N/A,1.28,No attack baseline
 E9,FedAvg + Byzantine 3/10,0.8119,0.9741,N/A,1.28,Attack degrades F1 -0.0422
 E9,Multi-Krum + Byzantine 3/10,0.7359,0.9586,N/A,1.28,Krum preserves AUC=0.9586
