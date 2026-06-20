@@ -32,4 +32,5 @@ env/
 Thumbs.db
 
 # Kaggle
-kaggle.json
+kaggle.json &
+VS_code
