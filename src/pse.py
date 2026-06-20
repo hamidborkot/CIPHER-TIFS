@@ -1,7 +1,6 @@
 """PSE — Persona-Stratified Ensemble.
 
 Paper module: Section III-C (CIPHER, IEEE TIFS submission)
-Previously known as: AIF (Anomaly Intent Fingerprinting) — name used in TDSC paper.
 Renamed to PSE here to maintain clear separation between TDSC and TIFS submissions.
 
 Function:
