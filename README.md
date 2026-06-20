@@ -13,22 +13,16 @@ CIPHER is the **first insider threat detection system** that provides **formally
 
 ---
 
-## ⚠️ TDSC Separation Notice
 
-A related but **distinct** paper (*SENTINEL-EGO*) is under review at IEEE TDSC.  
-That paper: network intrusion detection, NSL-KDD/CICIDS datasets, Behavioral Turing Test novelty.  
-This paper (CIPHER): **insider threat detection**, CERT r4.2/r5.2/r6.2, **MIA-validated DP novelty**.  
-Module names are intentionally different. Do NOT reuse TDSC module names (PBI/AIF/FAL/CDE) in this paper.
-
-| Dimension | TDSC Paper (in review) | CIPHER / TIFS (this repo) |
+| Dimension | CIPHER / TIFS (this repo) |
 |---|---|---|
-| System name | SENTINEL-EGO | **CIPHER** |
-| Domain | Network intrusion | **Insider threat** |
-| Dataset | NSL-KDD, CICIDS2017, etc. | **CERT r4.2 / r5.2 / r6.2** |
-| Core novelty | Behavioral Turing Test (BTT) | **MIA-validated DP** |
-| Module: drift | PBI | **BDM** |
-| Module: ensemble | AIF | **PSE** |
-| Module: federation | FAL | **DPFA** |
+| System name |  **CIPHER** |
+| Domain | **Insider threat** |
+| Dataset | **CERT r4.2 / r5.2 / r6.2** |
+| Core novelty | **MIA-validated DP** |
+| Module: drift | **BDM** |
+| Module: ensemble | **PSE** |
+| Module: federation | **DPFA** |
 
 ---
 
@@ -155,7 +149,7 @@ CIPHER-TIFS/
 
 > *"CIPHER is the first insider threat detection system to provide formal (ε,δ)-DP guarantees with empirical MIA validation, demonstrating that DP suppresses attacker advantage from MIA AUC = 0.7834 to 0.5024, while maintaining F1 = 0.8531 under Byzantine-robust federated learning across three CERT dataset versions."*
 
-This claim is: **true**, **supported by data**, **not made by any existing paper**, and **distinct from the TDSC paper**.
+This claim is: **true**, **supported by data**, **not made by any existing paper**.
 
 ---
 
@@ -195,4 +189,4 @@ python scripts/generate_figures.py
 
 ---
 
-*Md. Hamid Borkot Tulla — Université de Bourgogne — IEEE TIFS Submission 2026*
+*Md. Hamid Borkot Tulla — IEEE TIFS Submission 2026*
