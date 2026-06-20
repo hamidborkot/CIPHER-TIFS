@@ -3,7 +3,6 @@
 #          Privacy-preserving Hierarchical fEderated behavioral leaRning)
 #
 # NOTE: This is the TIFS paper config.
-# TDSC paper (SENTINEL-EGO) uses different module names and datasets.
 
 # ─── Dataset ───────────────────────────────────────────────────────────────
 dataset:
@@ -15,7 +14,7 @@ dataset:
 
 # ─── BDM (Behavioral Drift Monitor) ────────────────────────────────────────
 # Paper: Section III-B, Algorithm 1, Eq.(2)
-# Was called: PBI (Persona Behavioral Integrity) in TDSC paper
+
 bdm:
   tau_drift: 0.25             # KL-divergence threshold (grid-searched)
   alpha_smooth: 0.10          # Exponential smoothing factor
@@ -25,7 +24,7 @@ bdm:
 
 # ─── PSE (Persona-Stratified Ensemble) ─────────────────────────────────────
 # Paper: Section III-C, Algorithm 2, Eq.(3)
-# Was called: AIF (Anomaly Intent Fingerprinting) in TDSC paper
+
 pse:
   theta_threat: 0.50          # Threat score threshold
   n_estimators: 200           # Trees for RF/XGBoost/LightGBM
@@ -36,7 +35,7 @@ pse:
 
 # ─── DPFA (Differentially Private Federated Aggregation) ────────────────────
 # Paper: Section III-D, Algorithms 3-4, Eqs.(4)(5)(6)
-# Was called: FAL (Federated Adversarial Learning) in TDSC paper
+
 dpfa:
   sigma: 1.28                 # Noise scale → epsilon=1.2830 at operating point
   C: 1.0                      # Gradient clipping norm
