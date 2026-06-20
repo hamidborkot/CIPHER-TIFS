@@ -1,1 +1,9 @@
-"""SENTINEL-EGO source package."""
+# CIPHER — Certified Insider-threat detection via Privacy-preserving
+#           Hierarchical fEderated behavioral leaRning
+# IEEE TIFS Submission 2026
+# Author: Md. Hamid Borkot Tulla, Université de Bourgogne
+#
+# Module naming (TIFS paper) vs TDSC paper:
+#   BDM  (this repo)  ←→  PBI  (TDSC paper, SENTINEL-EGO)
+#   PSE  (this repo)  ←→  AIF  (TDSC paper, SENTINEL-EGO)
+#   DPFA (this repo)  ←→  FAL  (TDSC paper, SENTINEL-EGO)

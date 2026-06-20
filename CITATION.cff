@@ -1,23 +1,26 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
+title: "CIPHER: Certified Insider-threat detection via Privacy-preserving Hierarchical fEderated behavioral leaRning"
+message: "If you use this work, please cite as below."
 type: software
-title: "SENTINEL-EGO: Privacy-Preserving Federated Insider Threat Detection"
 authors:
-  - family-names: Borkot
-    given-names: Hamid
-repository-code: "https://github.com/hamidborkot/SENTINEL-EGO-TIFS"
+  - family-names: Borkot Tulla
+    given-names: Md. Hamid
+    affiliation: Université de Bourgogne, Dijon, France
+repository-code: https://github.com/hamidborkot/SENTINEL-EGO-TIFS
 license: MIT
-year: 2025
-abstract: >
-  SENTINEL-EGO is a federated learning framework for insider threat detection
-  that achieves AUC = 0.9842 and F1 = 0.8571 on CERT r4.2 under formal
-  differential privacy guarantees (epsilon = 1.28, delta = 1e-5).
-  Evaluated across three independent environments: CERT r4.2 (behavioral),
-  corporate physical-access, and classified environments.
+version: 1.0.0
+date-released: 2026-06-21
 keywords:
-  - insider-threat-detection
-  - federated-learning
-  - differential-privacy
-  - CERT-dataset
-  - behavioral-analytics
-  - cybersecurity
+  - insider threat detection
+  - federated learning
+  - differential privacy
+  - membership inference attack
+  - behavioral drift detection
+  - CERT dataset
+  - Byzantine robustness
+abstract: >
+  CIPHER is the first insider threat detection system with formally proven
+  (epsilon,delta)-differential privacy guarantees empirically validated against
+  membership inference attacks. DP suppresses MIA attacker AUC from 0.7834 to
+  0.5024 while maintaining F1=0.8531, AUC=0.9601 (epsilon=1.28, CERT r4.2).
+  Submitted to IEEE Transactions on Information Forensics and Security (TIFS).
