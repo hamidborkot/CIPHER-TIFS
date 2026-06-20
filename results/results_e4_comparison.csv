@@ -3,4 +3,4 @@ Yuan (LSTM-CNN),2018,0.7812,0.9449,No,No,No,No,N/A,N/A,N/A,CERT r4.2,Yuan et al.
 LAN TIFS,2024,0.8103,0.9478,No,No,No,No,N/A,N/A,N/A,CERT r4.2,LAN et al. TIFS 2024,Centralized; no privacy
 FedAT (Gayathri),2024,0.6795,N/A,No,Yes,No,No,N/A,N/A,N/A,Custom,Gayathri et al. 2024,FL only; no DP/MIA
 Ye 2025 (DeepInsight-FL),2025,0.9972,0.9989,No,Yes,No,No,N/A,1098,100,CERT r4.2,Ye et al. 2025,"No DP; 100 FL rounds; 1098 features — NOT comparable under same security constraints"
-SENTINEL-EGO (Ours),2025,0.8571,0.9842,Yes,Yes,Yes,Yes,1.2830,28,10,CERT r4.2,This work,"Only system with DP+FL+Byzantine+MIA simultaneously; highest F1 among all DP-FL methods"
+CIPHER (Ours),2025,0.8571,0.9842,Yes,Yes,Yes,Yes,1.2830,28,10,CERT r4.2,This work,"Only system with DP+FL+Byzantine+MIA simultaneously; highest F1 among all DP-FL methods"
