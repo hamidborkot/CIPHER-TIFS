@@ -9,7 +9,7 @@ CERT r4.2 contains 5 insider threat scenarios:
   S4: Privilege escalation + lateral movement
   S5: Policy violation (general)
 
-This experiment tests whether SENTINEL-EGO generalizes across insider TYPE,
+This experiment tests whether CIPHER generalizes across insider TYPE,
 replacing the weaker cross-dataset generalization claim.
 """
 import pandas as pd
@@ -29,8 +29,8 @@ SCENARIO_MAP = {
 
 FEATURES_FULL = [
     "logon_count", "email_count", "http_count", "file_count",
-    "work_hours_ratio", "pbi_drift", "pbi_alert",
-    "aif_score", "aif_alert", "archetype_id"
+    "work_hours_ratio", "BDM_drift", "BDM_alert",
+    "PSE_score", "PSE_alert", "archetype_id"
 ]
 
 FEATURES_LEGACY = [
@@ -81,19 +81,19 @@ def main(df, scenario_col="scenario_type"):
             print(f"  {sc_code}: No test samples found, skipping")
             continue
 
-        r_full = evaluate_scenario(X_train, sc_test, sc_code, FEATURES_FULL, "SENTINEL-EGO")
+        r_full = evaluate_scenario(X_train, sc_test, sc_code, FEATURES_FULL, "CIPHER")
         r_legacy = evaluate_scenario(X_train, sc_test, sc_code, FEATURES_LEGACY, "Legacy-Only")
 
         if r_full and r_legacy:
-            r_full["PBI_Delta"] = round(r_full["F1"] - r_legacy["F1"], 4)
+            r_full["BDM_Delta"] = round(r_full["F1"] - r_legacy["F1"], 4)
             results.append(r_full)
-            print(f"  {sc_code}: SENTINEL F1={r_full['F1']:.4f}  Legacy F1={r_legacy['F1']:.4f}  PBI_delta={r_full['PBI_Delta']:+.3f}")
+            print(f"  {sc_code}: CIPHER F1={r_full['F1']:.4f}  Legacy F1={r_legacy['F1']:.4f}  BDM_delta={r_full['BDM_Delta']:+.3f}")
 
     df_out = pd.DataFrame(results)
     df_out.to_csv("results/results_e5_scenario_breakdown.csv", index=False)
     print("\nSaved: results/results_e5_scenario_breakdown.csv")
-    print("\nKey insight: PBI_Delta should be largest for S2 (slow-burn recon)")
-    print("This demonstrates PBI's unique value for hard-to-detect insiders.")
+    print("\nKey insight: BDM_Delta should be largest for S2 (slow-burn recon)")
+    print("This demonstrates BDM's unique value for hard-to-detect insiders.")
     return df_out
 
 
