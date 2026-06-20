@@ -1,7 +1,7 @@
 """E2: Ablation Study — FIXED VERSION
 Critical fix: Legacy-Only variant EXCLUDES usb_count, rm_copies, rm_ratio.
 These features are label-correlated (malicious users defined by removable media volume).
-Excluding them gives PBI and AIF a fair opportunity to demonstrate their contribution.
+Excluding them gives BDM and PSE a fair opportunity to demonstrate their contribution.
 
 Run on CERT r4.2 (Kaggle) or r6.2 (local GPU).
 """
@@ -12,7 +12,7 @@ from sklearn.metrics import f1_score, roc_auc_score, precision_score, recall_sco
 from sklearn.model_selection import train_test_split
 
 # ── CONFIG ────────────────────────────────────────────────────────────────────
-DATASET = "r4.2"          # change to "r6.2" for local GPU run
+DATASET = "r4.2"          # change to " r5.2 & r6.2" for local GPU run
 RANDOM_STATE = 42
 DP_EPSILON = 1.2830
 
@@ -23,22 +23,22 @@ FEATURE_SETS = {
         "file_count", "work_hours_ratio"
         # usb_count, rm_copies, rm_ratio INTENTIONALLY EXCLUDED
     ],
-    "+PBI": [
+    "+BDM": [
         "logon_count", "email_count", "http_count",
         "file_count", "work_hours_ratio",
-        "pbi_drift", "pbi_alert"
+        "BDM_drift", "BDM_alert"
     ],
-    "+PBI+AIF": [
+    "+BDM+PSE": [
         "logon_count", "email_count", "http_count",
         "file_count", "work_hours_ratio",
-        "pbi_drift", "pbi_alert",
-        "aif_score", "aif_alert"
+        "BDm_drift", "BDM_alert",
+        "PSE_score", "PSE_alert"
     ],
-    "Full SENTINEL-EGO": [
+    "Full CIPHER": [
         "logon_count", "email_count", "http_count",
         "file_count", "work_hours_ratio",
-        "pbi_drift", "pbi_alert",
-        "aif_score", "aif_alert",
+        "BDM_drift", "BDM_alert",
+        "PSE_score", "PSE_alert",
         "archetype_id"
     ],
 }
@@ -101,7 +101,7 @@ def main(df, label_col="label"):
     print(f"Dataset: CERT {DATASET} | N={len(df)} | Malicious={y.sum()} ({100*y.mean():.2f}%)")
     print("="*70)
     print("NOTE: Legacy-Only EXCLUDES usb_count, rm_copies, rm_ratio")
-    print("      This is the CORRECT ablation — fair baseline for PBI/AIF evaluation")
+    print("      This is the CORRECT ablation — fair baseline for BDM/PSE evaluation")
     print("="*70)
 
     results = []
@@ -119,10 +119,10 @@ def main(df, label_col="label"):
 
     # Report delta
     baseline = df_results[df_results["Variant"] == "Legacy-Only"]["F1"].values[0]
-    full = df_results[df_results["Variant"] == "Full SENTINEL-EGO"]["F1"].values[0]
+    full = df_results[df_results["Variant"] == "Full CIPHER"]["F1"].values[0]
     print(f"\nKey result: Legacy-Only F1={baseline:.4f}")
-    print(f"Full SENTINEL-EGO F1={full:.4f}")
-    print(f"PBI+AIF contribution: +{(full-baseline)*100:.1f}pp F1")
+    print(f"Full CIPHER F1={full:.4f}")
+    print(f"BDM+PSE contribution: +{(full-baseline)*100:.1f}pp F1")
     return df_results
 
 
@@ -131,4 +131,4 @@ if __name__ == "__main__":
     # df = pd.read_csv("data/cert_r42_features.csv")
     # main(df)
     print("Load your feature CSV and call main(df) to run the fixed ablation.")
-    print("Expected result: Legacy-Only F1 ≈ 0.65-0.72, Full SENTINEL-EGO F1 ≈ 0.85")
+    print("Expected result: Legacy-Only F1 ≈ 0.65-0.72, Full CIPHER F1 ≈ 0.85")
