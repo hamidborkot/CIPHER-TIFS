@@ -1,4 +1,4 @@
-# SENTINEL-EGO Results — CERT r5.2 (Local GPU Run)
+# CIPHER Results — CERT r5.2 (Local GPU Run)
 
 All results produced on local machine: **NVIDIA GeForce RTX 5070 Laptop GPU (8.5 GB VRAM)**  
 Dataset: **CERT Insider Threat Dataset r5.2** (2000 users, ~692K daily records)  
@@ -12,7 +12,7 @@ Date: June 2026
 | `table6_e8_mia_final.csv` | Table VI | E8 — Membership inference attack audit |
 | `table7_e9_stable.csv` | Table VII | E9 — Byzantine robustness |
 | `eps_sweep.csv` | Figure 4 | ε-sweep across σ∈{1.0,1.5,2.0,2.5,3.0} |
-| `SENTINEL_EGO_ALL_RESULTS.csv` | All | Master consolidated results |
+| `CIPHER_ALL_RESULTS.csv` | All | Master consolidated results |
 
 ## Key Numbers
 
@@ -53,5 +53,5 @@ Date: June 2026
 
 ## Reproducibility
 
-All experiments use `SEED=42`. Full code in `src/sentinel_ego_local.py`.
+All experiments use `SEED=42`. Full code in `src/CIPHER_local.py`.
 Change `CERT = BASE_R52` to run on r5.2.
