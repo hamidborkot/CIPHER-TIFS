@@ -1,14 +1,20 @@
 """
-federated.py — SENTINEL-EGO Federated Learning Components
+federated.py — CIPHER Federated Learning Components (DPFA module)
+
+Paper: IEEE TIFS Submission — hamidborkot/CIPHER-TIFS
+Module: DPFA (Differentially Private Federated Aggregation), Section III-D
+
+Previous name: FAL (Federated Adversarial Learning) — used in TDSC paper only.
+Do NOT reference this file in the TDSC paper.
 
 Includes:
-  - local_train       : DP-SGD local training with focal class weighting
-  - fed_avg           : weighted FedAvg aggregation
-  - multi_krum        : Multi-Krum Byzantine-robust aggregation
-  - malicious_train   : Byzantine attack simulation (label flip + grad scaling)
-  - run_fl            : standard FL loop (FedAvg)
-  - run_fl_byzantine  : FL loop with mixed honest/Byzantine clients
-  - compute_epsilon   : Rényi-DP epsilon accounting
+  - local_train        : DP-SGD honest local training (Eq. 4, 5)
+  - fed_avg            : weighted FedAvg aggregation (Eq. 6)
+  - multi_krum         : Multi-Krum Byzantine-robust aggregation
+  - malicious_train    : Byzantine attack simulation (E9)
+  - run_fl             : standard DPFA FL loop
+  - run_fl_byzantine   : FL loop with mixed honest/Byzantine clients (E9)
+  - compute_epsilon    : Renyi-DP epsilon accounting (Theorem 1)
 """
 
 import numpy as np
@@ -18,14 +24,14 @@ import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 from copy import deepcopy
 
-# ── Default hyperparameters (override via config.yaml) ──────
+# ── Default hyperparameters (see config/cipher_config.yaml) ──
 FL_ROUNDS    = 10
 LOCAL_EPOCHS = 3
 LR           = 0.001
-NOISE_SCALE  = 2.0
-CLIP_NORM    = 1.0
-Q_SAMPLE     = 0.01
-DP_DELTA     = 1e-5
+NOISE_SCALE  = 2.0    # DPFA sigma
+CLIP_NORM    = 1.0    # DPFA clipping norm C
+Q_SAMPLE     = 0.01   # Poisson subsampling rate q
+DP_DELTA     = 1e-5   # Target delta
 N_CLIENTS    = 10
 N_BYZANTINE  = 3
 GRAD_SCALE   = 10.0
@@ -33,17 +39,20 @@ GRAD_SCALE   = 10.0
 
 def compute_epsilon(q: float, sigma: float, steps: int,
                     delta: float = DP_DELTA, alpha: int = 10) -> float:
-    """Rényi-DP to (epsilon, delta)-DP conversion.
+    """Renyi-DP to (epsilon, delta)-DP conversion. Theorem 1 in CIPHER paper.
 
     Args:
         q:      Poisson subsampling rate per step
-        sigma:  Gaussian noise multiplier
-        steps:  Total number of gradient steps (rounds * local_epochs)
+        sigma:  Gaussian noise multiplier (DPFA sigma)
+        steps:  Total gradient steps = rounds * local_epochs
         delta:  DP failure probability
-        alpha:  Rényi order (default 10)
+        alpha:  Renyi order (default 10)
 
     Returns:
         epsilon: privacy budget
+
+    Example (CIPHER operating point):
+        compute_epsilon(q=0.10, sigma=1.28, steps=30) -> 1.2830
     """
     rdp = alpha * (q ** 2) / (2 * sigma ** 2) * steps
     return rdp + np.log(1 / delta) / (alpha - 1)
@@ -52,17 +61,17 @@ def compute_epsilon(q: float, sigma: float, steps: int,
 def local_train(model, Xn: np.ndarray, yn: np.ndarray,
                 epochs: int = LOCAL_EPOCHS,
                 apply_dp: bool = True) -> nn.Module:
-    """Honest local training with focal class weighting and optional DP-SGD.
+    """DPFA honest local training with DP-SGD (Eqs. 4 and 5).
 
-    Class weight is capped at 40 to prevent gradient explosion on highly
-    imbalanced shards where a client has very few malicious samples.
+    Applies per-sample gradient clipping (Eq. 4) then Gaussian noise (Eq. 5).
+    Class weight capped at 40 to prevent gradient explosion on imbalanced shards.
 
     Args:
-        model:     ThreatNet instance (in-place modified and returned)
+        model:     ThreatNet instance
         Xn:        Feature matrix (numpy float32)
         yn:        Binary label vector (numpy float32)
         epochs:    Number of local epochs
-        apply_dp:  If True, apply per-sample gradient clipping + Gaussian noise
+        apply_dp:  If True, apply DPFA clipping + noise
 
     Returns:
         Trained model
@@ -84,7 +93,7 @@ def local_train(model, Xn: np.ndarray, yn: np.ndarray,
             loss = (nn.functional.binary_cross_entropy(
                         model(Xb), yb, reduction='none') * wt).mean()
             loss.backward()
-            if apply_dp:
+            if apply_dp:  # DPFA: Eq.(4) clip, Eq.(5) noise
                 for p in model.parameters():
                     if p.grad is None:
                         continue
@@ -98,19 +107,15 @@ def local_train(model, Xn: np.ndarray, yn: np.ndarray,
 def malicious_train(model, Xn: np.ndarray, yn: np.ndarray,
                     epochs: int = LOCAL_EPOCHS,
                     scale: float = GRAD_SCALE) -> nn.Module:
-    """Byzantine attack simulation: label flip (1->0) + gradient scaling.
+    """E9 Byzantine attack: label flip (insider->benign) + gradient scaling.
 
-    The attacker flips all insider labels to benign to poison the global
-    model toward missing insiders, then amplifies gradients by `scale` to
-    dominate the FedAvg weight update (model poisoning).
-
-    This attack is empirically effective against standard FedAvg but is
-    filtered by Multi-Krum's distance-based selection criterion.
+    This attack is empirically effective against standard FedAvg but
+    filtered by DPFA's Multi-Krum distance-based selection (E9 results).
 
     Args:
         model:   ThreatNet instance
         Xn:      Feature matrix
-        yn:      True label vector (will be flipped internally)
+        yn:      True labels (flipped internally)
         epochs:  Local training epochs
         scale:   Gradient amplification factor
 
@@ -138,12 +143,12 @@ def malicious_train(model, Xn: np.ndarray, yn: np.ndarray,
 
 
 def fed_avg(global_model, local_models: list, weights: list) -> nn.Module:
-    """Weighted FedAvg aggregation.
+    """DPFA weighted FedAvg aggregation (Eq. 6).
 
     Args:
-        global_model:  Current global ThreatNet model (updated in-place)
+        global_model:  Current global ThreatNet (updated in-place)
         local_models:  List of locally-trained models
-        weights:       List of weights (e.g. client_size / total_size)
+        weights:       Per-client weights (client_size / total_size)
 
     Returns:
         Updated global model
@@ -159,26 +164,20 @@ def fed_avg(global_model, local_models: list, weights: list) -> nn.Module:
 
 
 def multi_krum(models: list, n_byzantine: int = N_BYZANTINE) -> nn.Module:
-    """Multi-Krum Byzantine-robust aggregation.
+    """DPFA Multi-Krum Byzantine-robust aggregation.
 
-    Scores each model by the sum of squared L2 distances to its
-    k = n - n_byzantine - 2 nearest neighbors. Selects the top
-    m = n - n_byzantine lowest-scoring (most honest) models and
-    returns their equal average.
+    Scores each model by sum of squared L2 distances to k nearest neighbors.
+    Selects m = n - n_byzantine lowest-scoring models and averages them.
+    Tolerates up to n_byzantine < n/2 adversaries (E9 experiment).
 
-    Theoretical guarantee: tolerates up to n_byzantine < n/2 adversaries.
-    Requires n >= 2*n_byzantine + 3 clients.
-
-    Reference:
-        Blanchard et al., "Machine Learning with Adversaries:
-        Byzantine Tolerant Gradient Descent", NeurIPS 2017.
+    Reference: Blanchard et al., NeurIPS 2017.
 
     Args:
         models:      List of local ThreatNet models
         n_byzantine: Number of assumed Byzantine clients
 
     Returns:
-        Aggregated model from selected honest candidates
+        Aggregated model from honest candidates
     """
     params = [torch.cat([p.data.view(-1) for p in m.parameters()])
               for m in models]
@@ -208,21 +207,21 @@ def multi_krum(models: list, n_byzantine: int = N_BYZANTINE) -> nn.Module:
 
 
 def run_fl(Xtr: np.ndarray, ytr: np.ndarray, masks: list,
-           apply_dp: bool = True, label: str = "FL",
+           apply_dp: bool = True, label: str = "CIPHER",
            n_rounds: int = FL_ROUNDS,
            eval_fn=None, X_test=None, y_test=None):
-    """Standard FL training loop (FedAvg).
+    """Standard DPFA federation loop (FedAvg). Paper Algorithm 3.
 
     Args:
         Xtr:       Training feature matrix
         ytr:       Training label vector
-        masks:     List of boolean index arrays, one per client
-        apply_dp:  Enable DP-SGD in local training
-        label:     Display label for progress output
-        n_rounds:  Number of federation rounds
-        eval_fn:   Optional evaluation function (model, X, y) -> metrics dict
-        X_test:    Test features for mid-training evaluation
-        y_test:    Test labels for mid-training evaluation
+        masks:     Boolean index arrays per silo
+        apply_dp:  Enable DPFA DP-SGD
+        label:     Display label
+        n_rounds:  Federation rounds
+        eval_fn:   Optional eval function for mid-training metrics
+        X_test:    Test features
+        y_test:    Test labels
 
     Returns:
         (global_model, epsilon)
@@ -246,7 +245,7 @@ def run_fl(Xtr: np.ndarray, ytr: np.ndarray, masks: list,
 
         if eval_fn is not None and X_test is not None and rnd % 3 == 2:
             r, _ = eval_fn(gm, X_test, y_test)
-            print(f"  [{label}] Round {rnd+1}/{n_rounds} "
+            print(f"  [CIPHER-{label}] Round {rnd+1}/{n_rounds} "
                   f"F1={r['F1']:.4f} AUC={r['AUC']:.4f}")
 
     eps = compute_epsilon(Q_SAMPLE, NOISE_SCALE, n_rounds * LOCAL_EPOCHS)
@@ -256,22 +255,13 @@ def run_fl(Xtr: np.ndarray, ytr: np.ndarray, masks: list,
 def run_fl_byzantine(Xtr: np.ndarray, ytr: np.ndarray, masks: list,
                      poison_ids: set,
                      aggregation: str = "fedavg",
-                     label: str = "FL",
+                     label: str = "CIPHER",
                      n_rounds: int = FL_ROUNDS):
-    """FL training loop with simulated Byzantine clients.
+    """DPFA FL loop with Byzantine clients (E9 experiment). Table X.
 
-    Honest clients train with DP-SGD (local_train).
-    Byzantine clients apply label flip + gradient scaling (malicious_train).
-    Aggregation is either standard FedAvg or Multi-Krum.
-
-    Args:
-        Xtr:         Training features
-        ytr:         Training labels (unmodified — Byzantine clients flip internally)
-        masks:       Client index masks
-        poison_ids:  Set of client indices that are Byzantine
-        aggregation: 'fedavg' or 'krum'
-        label:       Display label
-        n_rounds:    Federation rounds
+    Honest clients: DPFA DP-SGD (local_train).
+    Byzantine clients: label flip + gradient scaling (malicious_train).
+    Aggregation: 'fedavg' (vulnerable) or 'krum' (DPFA Multi-Krum, robust).
 
     Returns:
         (global_model, epsilon)
@@ -300,5 +290,5 @@ def run_fl_byzantine(Xtr: np.ndarray, ytr: np.ndarray, masks: list,
             gm    = fed_avg(gm, lms, [s / total for s in sizes])
 
     eps = compute_epsilon(Q_SAMPLE, NOISE_SCALE, n_rounds * LOCAL_EPOCHS)
-    print(f"  [{label}] ε={eps:.4f}  aggregation={aggregation}")
+    print(f"  [CIPHER-{label}] epsilon={eps:.4f}  aggregation={aggregation}")
     return gm, eps
