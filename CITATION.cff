@@ -5,8 +5,8 @@ type: software
 authors:
   - family-names: Borkot Tulla
     given-names: Md. Hamid
-    affiliation: Université de Bourgogne, Dijon, France
-repository-code: https://github.com/hamidborkot/SENTINEL-EGO-TIFS
+    affiliation: CQUPT,China
+repository-code: https://github.com/hamidborkot/CIPHER-TIFS
 license: MIT
 version: 1.0.0
 date-released: 2026-06-21
