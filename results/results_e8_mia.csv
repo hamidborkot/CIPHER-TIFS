@@ -1,5 +1,5 @@
 Dataset,Config,MIA_AUC,MIA_Advantage,Epsilon,Delta,Threshold_Ref,Status,Notes
-CERT r4.2,SENTINEL-EGO (FL+DP),0.5024,0.0024,1.2830,1e-05,0.53,PASS,"Near-random; DP mechanism fully suppresses membership inference"
-CERT r6.2,SENTINEL-EGO (FL+DP),0.5171,0.0171,1.2830,1e-05,0.53,PASS,"Slightly elevated due to lower class imbalance (2.8% malicious); still within near-random regime"
-CERT r5.2,SENTINEL-EGO (FL+DP),0.5352,0.0352,1.2830,1e-05,0.55,PASS,"Higher imbalance (5.45% malicious) produces skewed confidence distribution; AUC 0.535 < 0.55 threshold; DP guarantee holds"
+CERT r4.2,CIPHER (FL+DP),0.5024,0.0024,1.2830,1e-05,0.53,PASS,"Near-random; DP mechanism fully suppresses membership inference"
+CERT r6.2,CIPHER (FL+DP),0.5171,0.0171,1.2830,1e-05,0.53,PASS,"Slightly elevated due to lower class imbalance (2.8% malicious); still within near-random regime"
+CERT r5.2,CIPHER (FL+DP),0.5352,0.0352,1.2830,1e-05,0.55,PASS,"Higher imbalance (5.45% malicious) produces skewed confidence distribution; AUC 0.535 < 0.55 threshold; DP guarantee holds"
 CERT r4.2,No-DP Baseline,0.7834,0.2834,N/A,N/A,0.53,FAIL,"Without DP: MIA trivially succeeds; confirms DP is necessary"
