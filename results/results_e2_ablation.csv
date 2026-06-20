@@ -1,5 +1,5 @@
 Variant,Features_Used,Legacy_USB_Excluded,F1,AUC,Precision,Recall,FPR,FNR,Privacy,Epsilon,Dataset,Notes
-Legacy-Only,"logon_count,email_count,http_count,file_count,work_hours_ratio",YES,0.6821,0.8934,0.6540,0.7132,0.0189,0.2868,DP,1.2830,CERT r4.2,"No PBI/AIF/archetype; usb_count+rm_copies EXCLUDED — fair baseline"
-+PBI,"Legacy + pbi_drift + pbi_alert",YES,0.7654,0.9312,0.7823,0.7492,0.0124,0.2508,DP,1.2830,CERT r4.2,"PBI drift detection added; F1 +8.3pp over Legacy-Only"
-+PBI+AIF,"Legacy + PBI + aif_score + aif_alert",YES,0.8219,0.9687,0.8104,0.8338,0.0078,0.1662,DP,1.2830,CERT r4.2,"AIF co-occurrence scoring added; F1 +14.0pp over Legacy-Only"
-Full SENTINEL-EGO,"Legacy + PBI + AIF + archetype_id",YES,0.8571,0.9842,0.8228,0.8943,0.0054,0.1057,DP,1.2830,CERT r4.2,"Full system with archetype-stratified FL; F1 +17.5pp over fair Legacy-Only"
+Legacy-Only,"logon_count,email_count,http_count,file_count,work_hours_ratio",YES,0.6821,0.8934,0.6540,0.7132,0.0189,0.2868,DP,1.2830,CERT r4.2,"No BDM/PSE/archetype; usb_count+rm_copies EXCLUDED — fair baseline"
++BDM,"Legacy + BDM_drift + BDM_alert",YES,0.7654,0.9312,0.7823,0.7492,0.0124,0.2508,DP,1.2830,CERT r4.2,"PBI drift detection added; F1 +8.3pp over Legacy-Only"
++BDM+AIF,"Legacy + BDM + PSE_score + PSE_alert",YES,0.8219,0.9687,0.8104,0.8338,0.0078,0.1662,DP,1.2830,CERT r4.2,"PSE co-occurrence scoring added; F1 +14.0pp over Legacy-Only"
+Full CIPHER,"Legacy + BDM + PSE + archetype_id",YES,0.8571,0.9842,0.8228,0.8943,0.0054,0.1057,DP,1.2830,CERT r4.2,"Full system with archetype-stratified FL; F1 +17.5pp over fair Legacy-Only"
