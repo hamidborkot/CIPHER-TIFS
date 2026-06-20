@@ -5,9 +5,9 @@
 # Paper    : IEEE TIFS Submission — hamidborkot/CIPHER-TIFS
 #
 # Module naming in this file (TIFS paper):
-#   BDM  = Behavioral Drift Monitor      (was: PBI in TDSC paper)
-#   PSE  = Persona-Stratified Ensemble   (was: AIF in TDSC paper)
-#   DPFA = Diff. Private Fed. Aggregation (was: FAL in TDSC paper)
+#   BDM  = Behavioral Drift Monitor      
+#   PSE  = Persona-Stratified Ensemble   
+#   DPFA = Diff. Private Fed. Aggregation 
 #
 # Entry point: run as script or import functions.
 # All experiment results saved to results/r5.2/ or results/r6.2/
