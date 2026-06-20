@@ -4,9 +4,6 @@ federated.py — CIPHER Federated Learning Components (DPFA module)
 Paper: IEEE TIFS Submission — hamidborkot/CIPHER-TIFS
 Module: DPFA (Differentially Private Federated Aggregation), Section III-D
 
-Previous name: FAL (Federated Adversarial Learning) — used in TDSC paper only.
-Do NOT reference this file in the TDSC paper.
-
 Includes:
   - local_train        : DP-SGD honest local training (Eq. 4, 5)
   - fed_avg            : weighted FedAvg aggregation (Eq. 6)
