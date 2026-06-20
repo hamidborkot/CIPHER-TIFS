@@ -1,0 +1,4 @@
+PLACEHOLDER — regenerate with: python scripts/generate_figures.py
+Source: results/results_e2_ablation_FIXED.csv
+Figure: Ablation Study (E2)
+Key point: Full SENTINEL-EGO AUC=0.9655, +0.0093 over Legacy-Only

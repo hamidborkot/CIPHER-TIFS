@@ -1,0 +1,4 @@
+PLACEHOLDER — regenerate with: python scripts/generate_figures.py
+Source: results/results_e4_comparison_FINAL.csv
+Figure: SOTA Comparison (E4)
+Key point: Only system with DP+FL+Byzantine+MIA

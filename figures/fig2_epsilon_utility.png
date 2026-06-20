@@ -1,0 +1,4 @@
+PLACEHOLDER — regenerate with: python scripts/generate_figures.py
+Source: results/results_e3_privacy.csv
+Figure: Privacy-Utility Tradeoff (E3)
+Key point: Operating point epsilon=1.28, F1=0.8571, MIA_AUC=0.5171
