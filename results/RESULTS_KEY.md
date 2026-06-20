@@ -1,8 +1,8 @@
 # CIPHER Results Key
 
-> **System:** CIPHER (not SENTINEL-EGO — that is the TDSC paper)  
-> **Modules:** BDM / PSE / DPFA (not PBI / AIF / FAL)  
-> **Primary claim:** MIA-validated DP, NOT detection accuracy  
+> **System:** CIPHER 
+> **Modules:** BDM / PSE / DPFA  
+> **Primary claim:** MIA-validated DP
 
 This file is the single source of truth. Every table in the paper must trace back to a row in one of these CSVs.
 
