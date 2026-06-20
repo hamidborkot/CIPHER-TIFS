@@ -14,9 +14,6 @@ Pipeline:
 Usage:
   python src/cipher_main.py --dataset cert_r42 --epsilon 1.28 --rounds 10
 
-Note: This is the TIFS paper codebase.
-  The TDSC paper (SENTINEL-EGO) uses different module names:
-  PBI, AIF, FAL — do NOT import from this file in TDSC work.
 """
 
 import argparse
