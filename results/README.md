@@ -5,8 +5,8 @@ Upload your Kaggle output CSVs here after running.
 
 | File | Experiment | Description |
 |---|---|---|
-| `results_e1.csv` | E1 | Primary CERT r4.2 — Isolated-DP vs SENTINEL-EGO vs GBT |
-| `results_e2_ablation.csv` | E2 | Ablation study — Legacy / +PBI / +PBI+AIF / Full |
+| `results_e1.csv` | E1 | Primary CERT r4.2 — Isolated-DP vs CIPHER vs GBT |
+| `results_e2_ablation.csv` | E2 | Ablation study — Legacy / +BDM / +BDM+PSE / Full |
 | `results_e3_privacy.csv` | E3 | Privacy-utility tradeoff across σ = 0.5 – 8.0 |
 | `results_e4_comparison.csv` | E4 | Partitioning strategy comparison + baselines |
 | `results_convergence.csv` | E5 | Per-round convergence log |
@@ -15,7 +15,7 @@ Upload your Kaggle output CSVs here after running.
 ## Key Numbers (TIFS Submission)
 
 ```
-SENTINEL-EGO on CERT r4.2:
+CIPHER on CERT r4.2:
   F1        = 0.8571
   AUC       = 0.9842
   Recall    = 0.8943
