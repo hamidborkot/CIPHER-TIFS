@@ -19,9 +19,9 @@ def compute_pbi(
     Parameters
     ----------
     df            : DataFrame with user activity rows
-    feature_cols  : numeric columns to include in PBI
+    feature_cols  : numeric columns to include in BDM
     user_col      : column identifying each user
-    threshold     : PBI alert threshold (dynamic if None)
+    threshold     : BDM alert threshold (dynamic if None)
 
     Returns
     -------
