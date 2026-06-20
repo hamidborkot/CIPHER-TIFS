@@ -1,5 +1,5 @@
 """
-evaluate.py — SENTINEL-EGO Evaluation Utilities
+evaluate.py — CIPHER Evaluation Utilities
 
 Provides threshold-searched evaluation critical for imbalanced detection
 (2.7% positive rate). Uses both fine-grained threshold scan and
