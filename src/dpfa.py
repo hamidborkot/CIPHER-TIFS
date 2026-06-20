@@ -1,8 +1,6 @@
 """DPFA — Differentially Private Federated Aggregation.
 
 Paper module: Section III-D (CIPHER, IEEE TIFS submission)
-Previously known as: FAL (Federated Adversarial Learning) — name used in TDSC paper.
-Renamed to DPFA here to maintain clear separation between TDSC and TIFS submissions.
 
 Function:
   Implements privacy-preserving federated aggregation across K=4 silos.
